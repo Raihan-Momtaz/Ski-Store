@@ -1,5 +1,5 @@
 
-import { Grid2 } from "@mui/material";
+import { Grid2, Pagination } from "@mui/material";
 import ProductList from "./ProductList";
 import { useFetchProductsQuery } from "./catalogApi";
 import Filters from "./Filters";
@@ -19,7 +19,14 @@ export default function Catalog() {
             <Filters/>
         </Grid2 >
         <Grid2 size={9}>
-          <ProductList products={data}/>
+          <ProductList products={data.items}/>
+          <Pagination
+            color="secondary"
+            size="large"
+            count={data.pagination.totalPages}
+            page={data.pagination.currentPage}
+          
+          />
         </Grid2>
     </Grid2>
   )
