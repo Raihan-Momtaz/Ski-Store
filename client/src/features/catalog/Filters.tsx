@@ -1,6 +1,7 @@
-import { Box, FormControl, FormControlLabel, Paper, TextField, Radio, FormGroup } from "@mui/material";
+import { Box, FormControl, FormControlLabel, Paper,  Radio, FormGroup } from "@mui/material";
 import { useFetchFiltersQuery } from "./catalogApi"
 import { Checkbox } from "@mui/material";
+import Search from "./Search";
 
 
 const sortOptions = [
@@ -11,15 +12,11 @@ const sortOptions = [
 
 export default function Filters() {
     const {data} = useFetchFiltersQuery();
-    console.log(data);
+
   return (
     <Box display='flex' flexDirection='column' gap={3}>
         <Paper>
-            <TextField
-                label='Search products'
-                variant="outlined"
-                fullWidth
-            />
+            <Search/>
         </Paper>
         <Paper sx={{p:3}}>
             <FormControl>
