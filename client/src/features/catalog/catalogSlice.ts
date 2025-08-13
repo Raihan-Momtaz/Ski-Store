@@ -51,4 +51,5 @@ export const {
     setPageSize,
     setSearchTerm,
     setTypes,
+    resetParams,
 } = catalogSlice.actions;
