@@ -2,13 +2,19 @@ import { LockOutlined } from '@mui/icons-material'
 import { Box, Button, Container,  Paper, TextField, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import type { LoginSchema } from '../../app/lib/schemas/loginSchema';
+import { loginSchema, type LoginSchema } from '../../app/lib/schemas/loginSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useLoginMutation } from './accountApi';
 
 export default function LoginForm() {
-   const {register, handleSubmit, formState:{errors}} = useForm<LoginSchema>();
+    const [login, {isLoading}] = useLoginMutation();
+   const {register, handleSubmit, formState:{errors}} = useForm<LoginSchema>({
+        mode: 'onTouched',
+        resolver: zodResolver(loginSchema)
+    });
 
-   const onSubmit = (data: LoginSchema)=>{
-    console.log(data);
+   const onSubmit = async (data: LoginSchema)=>{
+        await login(data);
    };
   return (
      <Container component={Paper} maxWidth='sm' sx={{ borderRadius: 3 }}>
@@ -42,7 +48,7 @@ export default function LoginForm() {
                         error={!!errors.password}
                         helperText={errors.password?.message}
                     />
-                    <Button variant="contained" type="submit">
+                    <Button disabled={isLoading} variant="contained" type="submit">
                         Sign in
                     </Button>
                     </Box>           <Typography sx={{ textAlign: 'center' }}>

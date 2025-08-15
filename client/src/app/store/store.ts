@@ -28,7 +28,10 @@ export const store = configureStore({
         getDefaultMiddleware().concat(
             basketApi.middleware,
             catalogApi.middleware, 
-            errorAPi.middleware)
+            errorAPi.middleware,
+            accountApi.middleware
+        ),
+            
 });
 
 export type RootState = ReturnType<typeof store.getState>
