@@ -1,6 +1,6 @@
 import { LockOutlined } from '@mui/icons-material'
 import { Box, Button, Container,  Paper, TextField, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { loginSchema, type LoginSchema } from '../../app/lib/schemas/loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,6 +8,7 @@ import { useLoginMutation } from './accountApi';
 
 export default function LoginForm() {
     const [login, {isLoading}] = useLoginMutation();
+    const navigate = useNavigate();
    const {register, handleSubmit, formState:{errors}} = useForm<LoginSchema>({
         mode: 'onTouched',
         resolver: zodResolver(loginSchema)
@@ -15,6 +16,9 @@ export default function LoginForm() {
 
    const onSubmit = async (data: LoginSchema)=>{
         await login(data);
+        
+        navigate('/catalog');
+
    };
   return (
      <Container component={Paper} maxWidth='sm' sx={{ borderRadius: 3 }}>
