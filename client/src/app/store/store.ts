@@ -7,6 +7,7 @@ import { errorAPi } from "../../features/about/errorApi";
 import { basketApi } from "../../features/basket/basketApi";
 import { catalogSlice } from "../../features/catalog/catalogSlice";
 import { accountApi } from "../../features/account/accountApi";
+import { checkoutApi } from "../../features/catalog/checkoutApi";
 
 
 export function configureTheStore(){
@@ -19,6 +20,7 @@ export const store = configureStore({
         [errorAPi.reducerPath]:errorAPi.reducer,
         [basketApi.reducerPath]:basketApi.reducer,
         [accountApi.reducerPath]:accountApi.reducer,
+        [checkoutApi.reducerPath]:checkoutApi.reducer,
         counter: counterSlice.reducer,
         ui: uiSlice.reducer,
         catalog:catalogSlice.reducer
@@ -29,7 +31,8 @@ export const store = configureStore({
             basketApi.middleware,
             catalogApi.middleware, 
             errorAPi.middleware,
-            accountApi.middleware
+            accountApi.middleware,
+            checkoutApi.middleware,
         ),
             
 });
