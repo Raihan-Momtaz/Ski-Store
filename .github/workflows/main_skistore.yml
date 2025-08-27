@@ -17,16 +17,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up node.js 
-      - uses: actions/setup-node@v3
-      - with:
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
           node-version: '20'
 
       - name: Install deps and build client app
-      - run:
+        run: |
           cd client
-          npm Install --legacy-peer-deps
-          npm build
+          npm install --legacy-peer-deps
+          npm run build
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
@@ -57,7 +58,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -72,4 +73,3 @@ jobs:
           app-name: 'skistore'
           slot-name: 'Production'
           package: .
-          
