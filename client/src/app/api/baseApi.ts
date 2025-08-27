@@ -13,7 +13,7 @@ const sleep = () => new Promise(resolve => setTimeout (resolve, 1000));
 export const baseQueryWithErrorHandling = async (args: string | FetchArgs, api: BaseQueryApi, 
     extraOptions: object) => {
         api.dispatch(startLoading());
-        await sleep();
+        if (import.meta.env.DEV) await sleep();
         const result = await customerBaseQuery(args,api, extraOptions);
         api.dispatch(stopLoading());
 

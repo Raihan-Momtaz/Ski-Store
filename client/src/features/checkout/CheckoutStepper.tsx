@@ -16,19 +16,20 @@ const steps = ['Address', 'Payment', 'Review'];
 export default function CheckoutStepper() {
     const [activeStep, setActiveStep] = useState(0);
     const {basket} = useBasket();
-const { data, isLoading } = useFetchAddressQuery();
-const { name, ...restAddress } = (data ?? {}) as Address;
+    const { data, isLoading } = useFetchAddressQuery();
+    const { name, ...restAddress } = (data ?? {}) as Address;
     const [updateAddress] = useUpdateUserAddressMutation();
     const [saveAddressChecked, setSaveAddressChecked] = useState(false);
     const elements = useElements();
     const stripe = useStripe();
     const [addressComplete, setAddressComplete] = useState(false);
     const [paymentComplete, setPaymentComplete] = useState(false);
-     const [submitting, setSubmitting] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
     const {total, clearBasket} = useBasket();
-     const navigate = useNavigate();
-     const [confirmationToken, setConfirmationToken] = useState<ConfirmationToken | null>(null);
-     
+    const navigate = useNavigate();
+    const [confirmationToken, setConfirmationToken] = useState<ConfirmationToken | null>(null);
+
+    
     const handleNext = async () => {
         if (activeStep === 0 && saveAddressChecked && elements) {
             const address = await getStripeAddress();
