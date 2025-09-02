@@ -1,1 +1,4 @@
-{}
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d84187aa-92e5-4db7-a2ce-89ea4d3dcbbc/resourceGroups/restore-rg-v2/providers/Microsoft.Web/sites/skistore",
+    "appService.deploySubpath": "API\\bin\\Publish"
+}
